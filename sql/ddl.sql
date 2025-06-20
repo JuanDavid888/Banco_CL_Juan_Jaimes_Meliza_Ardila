@@ -117,3 +117,47 @@ CREATE TABLE historial_cuotas (
     fecha_cuota DATETIME NOT NULL,
     fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+-- LLaves foraneas
+
+ALTER TABLE cuota_manejo
+    ADD FOREIGN KEY (cliente_id) REFERENCES cliente(id);
+
+ALTER TABLE cuota_manejo
+    ADD FOREIGN KEY (tarjeta_id) REFERENCES tarjeta(id);
+
+ALTER TABLE cuota_manejo
+    ADD FOREIGN KEY (interes_id) REFERENCES intereses(id);
+
+ALTER TABLE cuota_manejo
+    ADD FOREIGN KEY (descuento_id) REFERENCES descuento(id);
+
+ALTER TABLE pago
+    ADD FOREIGN KEY (cliente_id) REFERENCES cliente(id);
+
+ALTER TABLE pago
+    ADD FOREIGN KEY (tarjeta_id) REFERENCES tarjeta(id);
+
+ALTER TABLE historial_pagos
+    ADD FOREIGN KEY (pago_id) REFERENCES pago(id);
+
+ALTER TABLE historial_cuotas
+    ADD FOREIGN KEY (cuotas_manejo_id) REFERENCES cuota_manejo(id);
+
+ALTER TABLE tarjeta
+    ADD FOREIGN KEY (cliente_id) REFERENCES cliente(id);
+
+ALTER TABLE tarjeta
+    ADD FOREIGN KEY (tipo_tarjeta_id) REFERENCES tipo_tarjeta(id);
+
+ALTER TABLE tarjeta
+    ADD FOREIGN KEY (cuenta_bancaria_id) REFERENCES cuenta_bancaria(id);
+
+ALTER TABLE tipo_tarjeta
+    ADD FOREIGN KEY (descuento_id) REFERENCES descuento(id);
+
+ALTER TABLE cuenta_bancaria
+    ADD FOREIGN KEY (tipo_cuenta_id) REFERENCES tipo_cuenta(id);
+
+ALTER TABLE cliente
+    ADD FOREIGN KEY (tarjeta_id) REFERENCES tarjeta(id);
