@@ -1,3 +1,6 @@
+
+-- CONSULTAS BASICAS
+
 --  Obtener el listado de todas las tarjetas de los clientes junto con su cuota de manejo.
 SELECT
     ta.id AS tarjeta_id,
@@ -34,4 +37,18 @@ SELECT
 FROM cliente AS cl
 JOIN cuota_manejo AS cu ON cl.id = cu.cliente_id
 WHERE cu.descuento > 0;
+
+-- Obtener un reporte mensual de las cuotas de manejo de cada tarjeta.
+
+SELECT  
+    ta.id AS tarjeta_id,
+    ta.nombre AS tarjeta_nombre,
+    SUM(cu.total_monto) AS total_cuotas_manejo,
+    MONTH(cu.fecha) AS mes      
+FROM tarjeta AS ta
+JOIN cuota_manejo AS cu ON ta.id = cu.tarjeta_id
+GROUP BY ta.id, ta.nombre, MONTH(cu.fecha)
+HAVING MONTH(cu.fecha) = 1; --ESCOJI EL PRIMER MES DEL AÑO
+
+   
 
