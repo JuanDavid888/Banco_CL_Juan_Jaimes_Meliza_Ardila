@@ -34,7 +34,7 @@ DROP TABLE IF EXISTS tipo_cuenta;
 
 CREATE TABLE tipo_cuenta (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    nombre ENUM('Ahorros', 'Corriente', 'Inversión') NOT NULL
+    nombre ENUM('Ahorros', 'Corriente', 'Inversion') NOT NULL
 );
 
 CREATE TABLE descuento (
