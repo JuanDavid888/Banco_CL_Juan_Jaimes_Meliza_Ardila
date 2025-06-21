@@ -50,5 +50,7 @@ JOIN cuota_manejo AS cu ON ta.id = cu.tarjeta_id
 GROUP BY ta.id, ta.nombre, MONTH(cu.fecha)
 HAVING MONTH(cu.fecha) = 1; --ESCOJI EL PRIMER MES DEL AÑO
 
-   
+-- Consultas Avanzadas:
+-- Obtener los clientes con pagos pendientes durante los últimos tres meses.
+
 
