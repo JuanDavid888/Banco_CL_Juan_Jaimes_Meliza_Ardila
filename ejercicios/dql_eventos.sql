@@ -1,7 +1,7 @@
 --  Obtener el listado de todas las tarjetas de los clientes junto con su cuota de manejo.
 SELECT
     ta.id AS tarjeta_id,
-    cl.nombre AS cliente_nombre,
+    cl.no mbre AS cliente_nombre,
     cu.total_monto AS cuota_manejo
 FROM tarjeta AS ta
 JOIN cuota_manejo AS cu ON ta.id = cu.tarjeta_id
@@ -24,3 +24,14 @@ FROM cliente AS cl
 JOIN pago AS pa ON cl.id = pa.cliente_id
 JOIN historial_pagos AS hi ON pa.id = hi.pago_id
 WHERE YEAR(hi.fecha) = 2023;
+
+-- Consultar las cuotas de manejo de los clientes con descuento aplicado.
+
+SELECT 
+    cl.nombre AS clienta_nombre,
+    cu.total_monto AS monto_cuota,
+    cu.descuento AS descuento_aplicado
+FROM cliente AS cl
+JOIN cuota_manejo AS cu ON cl.id = cu.cliente_id
+WHERE cu.descuento > 0;
+
