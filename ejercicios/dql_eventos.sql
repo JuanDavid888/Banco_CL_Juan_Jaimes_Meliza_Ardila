@@ -51,6 +51,25 @@ GROUP BY ta.id, ta.nombre, MONTH(cu.fecha)
 HAVING MONTH(cu.fecha) = 1; --ESCOJI EL PRIMER MES DEL AÑO
 
 -- Consultas Avanzadas:
--- Obtener los clientes con pagos pendientes durante los últimos tres meses.
+-- Obtener los clientes con pagos pendientes durante los últimos tres meses.    
+SELECT 
+    cl.nombre AS cliente_nombre,
+    SUM(pa.total) AS total_pendiente
+FROM cliente AS cl
+JOIN pago AS pa ON cl.id = pa.cliente_id
+JOIN historial_pagos AS hi ON pa.id = hi.pago_id
+WHERE hi.fecha >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH)
+GROUP BY cl.id
+HAVING SUM(pa.total) > 0;
+     
+-- Consultar las cuotas de manejo aplicadas a cada tipo de tarjeta en un período específico.
+SELECT 
+    ta.tipo_tarjeta_id AS tipo_tarjeta,
+    SUM(cu.total_monto) AS total_cuotas_manejo
+FROM tarjeta AS ta
+JOIN cuota_manejo AS cu ON ta.id = cu.tarjeta_id
+WHERE cu.fecha BETWEEN '2023-01-01' AND '2023-12-31'
+GROUP BY ta.tipo_tarjeta_id;
 
+    
 
