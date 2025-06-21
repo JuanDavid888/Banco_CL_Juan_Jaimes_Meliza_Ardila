@@ -56,17 +56,6 @@ CREATE TABLE tipo_tarjeta (
     descuento_id INT NOT NULL
 );
 
-CREATE TABLE tarjeta (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    numero VARCHAR(16) NOT NULL UNIQUE,
-    cliente_id INT NOT NULL,
-    tipo_tarjeta_id INT NOT NULL,
-    cuenta_bancaria_id INT NOT NULL,
-    fecha_activacion DATETIME DEFAULT CURRENT_TIMESTAMP,
-    fecha_expiracion DATETIME NOT NULL,
-    estado ENUM('Activa', 'Inactiva', 'Bloqueada', 'Cerrada') DEFAULT 'Activa'
-);
-
 CREATE TABLE cuenta_bancaria (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     numero_cuenta VARCHAR(10) NOT NULL UNIQUE,
@@ -74,6 +63,16 @@ CREATE TABLE cuenta_bancaria (
     monto DECIMAL(10,2) NOT NULL,
     estado ENUM('Activa', 'Inactiva', 'Bloqueada', 'Cerrada') DEFAULT 'Activa',
     fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE tarjeta (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    numero VARCHAR(16) NOT NULL UNIQUE,
+    tipo_tarjeta_id INT NOT NULL,
+    cuenta_bancaria_id INT NOT NULL,
+    fecha_activacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+    fecha_expiracion DATETIME NOT NULL,
+    estado ENUM('Activa', 'Inactiva', 'Bloqueada', 'Cerrada') DEFAULT 'Activa'
 );
 
 CREATE TABLE cliente (
